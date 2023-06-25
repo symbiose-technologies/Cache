@@ -1,9 +1,9 @@
 #if os(iOS) || os(tvOS)
   import UIKit
-  public typealias Image = UIImage
+  public typealias CachePlatformImage = UIImage
 #elseif os(watchOS)
 
 #elseif os(OSX)
   import AppKit
-  public typealias Image = NSImage
+  public typealias CachePlatformImage = NSImage
 #endif

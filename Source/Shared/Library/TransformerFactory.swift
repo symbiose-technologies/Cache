@@ -10,16 +10,16 @@ public class TransformerFactory {
   }
 
   #if os(iOS) || os(tvOS) || os(macOS)
-  public static func forImage() -> Transformer<Image> {
-    let toData: (Image) throws -> Data = { image in
+  public static func forImage() -> Transformer<CachePlatformImage> {
+    let toData: (CachePlatformImage) throws -> Data = { image in
       return try image.cache_toData().unwrapOrThrow(error: StorageError.transformerFail)
     }
 
-    let fromData: (Data) throws -> Image = { data in
-      return try Image(data: data).unwrapOrThrow(error: StorageError.transformerFail)
+    let fromData: (Data) throws -> CachePlatformImage = { data in
+      return try CachePlatformImage(data: data).unwrapOrThrow(error: StorageError.transformerFail)
     }
 
-    return Transformer<Image>(toData: toData, fromData: fromData)
+    return Transformer<CachePlatformImage>(toData: toData, fromData: fromData)
   }
   #endif
 

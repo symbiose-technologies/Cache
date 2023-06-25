@@ -2,20 +2,20 @@ import Foundation
 
 #if os(iOS) || os(tvOS) || os(macOS)
 public struct ImageWrapper: Codable {
-  public let image: Image
+  public let image: CachePlatformImage
 
   public enum CodingKeys: String, CodingKey {
     case image
   }
 
-  public init(image: Image) {
+  public init(image: CachePlatformImage) {
     self.image = image
   }
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let data = try container.decode(Data.self, forKey: CodingKeys.image)
-    guard let image = Image(data: data) else {
+    guard let image = CachePlatformImage(data: data) else {
       throw StorageError.decodingFailed
     }
 
